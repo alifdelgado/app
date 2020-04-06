@@ -8,6 +8,11 @@ use App\Http\Requests\SaveProjectRequest;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         // $projects = Project::paginate();
@@ -43,12 +48,12 @@ class ProjectController extends Controller
     {
         $project->update($request->validated());
 
-        return redirect()->route('projects.show', $project)->with('status', 'El proyecto fue actualizado correctamente');;
+        return redirect()->route('projects.show', $project)->with('status', 'El proyecto fue actualizado correctamente');
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
-        return redirect()->route('projects.index')->with('status', 'El proyecto fue eliminado correctamente');;
+        return redirect()->route('projects.index')->with('status', 'El proyecto fue eliminado correctamente');
     }
 }

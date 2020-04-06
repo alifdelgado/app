@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'home')->name('home');
+Route::view('/', 'welcome')->name('welcome');
 Route::view('/about', 'about')->name('about');
 Route::resource('portfolio', 'ProjectController')->parameters(['portfolio' => 'project'])->names('projects');
 // Route::get('/portfolio', 'ProjectController@index')->name('projects.index');
@@ -23,4 +23,16 @@ Route::resource('portfolio', 'ProjectController')->parameters(['portfolio' => 'p
 // Route::delete('/portfolio/{project}', 'ProjectController@destroy')->name('projects.destroy');
 
 Route::view('/contact', 'contact')->name('contact');
-// Route::post('contact', 'MessageController@store')->name('messages.store');
+Route::post('/contact', 'MessageController@store')->name('messages.store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::post('/users', 'UserController@store')->name('users.store');
+Route::get('/users/create', 'UserController@create')->name('users.create');
+Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
+Route::patch('/users/edit/{id}', 'UserController@update')->name('users.update');
+Route::delete('/users/{id}', 'UserController@destroy')->name('users.destroy');
+Route::get('/users/{id}', 'UserController@show')->name('users.show');
